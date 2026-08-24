@@ -66,35 +66,61 @@ function DashboardPage() {
   const k = data.kpis;
 
   return (
-    <div className="reveal space-y-6">
+    <div className="reveal space-y-8">
       <PageHeader
         title="Console opérationnelle"
         subtitle="Qu'est-ce qui nécessite votre intervention maintenant ?"
+        actions={
+          <Link
+            to="/admin/transactions"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-3.5 py-2 text-[13px] font-semibold text-primary-foreground shadow-[var(--shadow-brand)] transition-opacity hover:opacity-90"
+          >
+            <ArrowUpRight className="size-4" /> File de traitement
+          </Link>
+        }
       />
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard title="À examiner" value={k.toReview} tone="warning" icon={<AlertTriangle className="size-5" />} />
-        <KpiCard title="Preuves attendues" value={k.pendingProof} tone="warning" icon={<Clock className="size-5" />} />
-        <KpiCard title="Confirmées" value={k.confirmed} tone="success" icon={<CheckCircle2 className="size-5" />} />
-        <KpiCard title="Rejetées" value={k.rejected} tone="danger" icon={<XCircle className="size-5" />} />
-        <KpiCard
-          title="Règlements en attente"
-          value={k.pendingSettlements}
-          icon={<Landmark className="size-5" />}
-        />
-        <KpiCard title="Solde disponible" value={money(k.available)} icon={<Wallet className="size-5" />} />
-        <KpiCard title="Montant en attente" value={money(k.pending)} icon={<Coins className="size-5" />} />
-        <KpiCard
-          title="Utilisateurs"
-          value={k.users}
-          hint={`${k.partners} partenaires actifs`}
-          icon={<Users className="size-5" />}
-        />
-      </div>
+      {/* File d'attente opérationnelle */}
+      <section className="space-y-3">
+        <h2 className="section-title block">Interventions requises</h2>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <KpiCard title="À examiner" value={k.toReview} tone="warning" icon={<AlertTriangle className="size-4" />} />
+          <KpiCard title="Preuves attendues" value={k.pendingProof} tone="warning" icon={<Clock className="size-4" />} />
+          <KpiCard title="Confirmées" value={k.confirmed} tone="success" icon={<CheckCircle2 className="size-4" />} />
+          <KpiCard title="Rejetées" value={k.rejected} tone="danger" icon={<XCircle className="size-4" />} />
+        </div>
+      </section>
 
-      <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="p-4 lg:col-span-2">
-          <h2 className="section-title mb-3 block">Volumes des 14 derniers jours</h2>
+      {/* Position financière — bande compacte */}
+      <section className="space-y-3">
+        <h2 className="section-title block">Position financière</h2>
+        <Card className="surface grid gap-px overflow-hidden rounded-xl bg-line p-0 shadow-none sm:grid-cols-2 xl:grid-cols-4">
+          {[
+            { label: "Solde disponible", value: money(k.available), icon: <Wallet className="size-4" />, hint: "Fonds mobilisables" },
+            { label: "Montant en attente", value: money(k.pending), icon: <Coins className="size-4" />, hint: "En cours de traitement" },
+            { label: "Règlements en attente", value: String(k.pendingSettlements), icon: <Landmark className="size-4" />, hint: "À exécuter" },
+            { label: "Utilisateurs", value: String(k.users), icon: <Users className="size-4" />, hint: `${k.partners} partenaires actifs` },
+          ].map((s) => (
+            <div key={s.label} className="flex flex-col gap-2 bg-surface px-5 py-4">
+              <span className="flex items-center gap-2 text-muted-foreground">
+                {s.icon}
+                <span className="mono-label truncate">{s.label}</span>
+              </span>
+              <p className="num font-display truncate text-[1.375rem] leading-none font-semibold text-foreground">
+                {s.value}
+              </p>
+              <p className="truncate text-xs text-muted-foreground">{s.hint}</p>
+            </div>
+          ))}
+        </Card>
+      </section>
+
+      <div className="grid gap-5 lg:grid-cols-3">
+        <Card className="surface rounded-xl p-5 shadow-none lg:col-span-2">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <h2 className="section-title block">Volumes des 14 derniers jours</h2>
+            <span className="mono-label">XAF</span>
+          </div>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data.series}>
@@ -127,8 +153,8 @@ function DashboardPage() {
           </div>
         </Card>
 
-        <Card className="p-4">
-          <h2 className="section-title mb-3 block">Répartition par type</h2>
+        <Card className="surface rounded-xl p-5 shadow-none">
+          <h2 className="section-title mb-4 block">Répartition par type</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.mix.map((m) => ({ ...m, type: label(TX_TYPE_LABELS, m.type) }))}>
@@ -149,33 +175,47 @@ function DashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="p-4">
-          <div className="mb-3 flex items-center justify-between">
+      <div className="grid gap-5 lg:grid-cols-2">
+        <Card className="surface rounded-xl p-0 shadow-none">
+          <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
             <h2 className="section-title">À traiter maintenant</h2>
-            <Link to="/admin/transactions" className="text-xs font-medium text-primary hover:underline">
-              Tout voir
+            <Link
+              to="/admin/transactions"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+            >
+              Tout voir <ArrowUpRight className="size-3.5" />
             </Link>
           </div>
           {data.queue.length === 0 ? (
             <EmptyState message="Aucune transaction en attente d'intervention." />
           ) : (
-            <ul className="divide-y divide-border">
+            <ul className="divide-y divide-line">
               {data.queue.map((t: any) => (
-                <li key={t.id} className="flex items-center gap-3 py-2.5">
+                <li
+                  key={t.id}
+                  className="flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3.5 transition-colors hover:bg-primary/[0.035]"
+                >
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
-                      {label(TX_TYPE_LABELS, t.type)} · {money(t.amount)}
+                    <div className="flex items-baseline gap-2">
+                      <span className="truncate text-sm font-semibold text-foreground">
+                        {label(TX_TYPE_LABELS, t.type)}
+                      </span>
+                      <span className="num text-sm font-semibold text-foreground">
+                        {money(t.amount)}
+                      </span>
+                    </div>
+                    <p className="mt-1 truncate text-xs text-muted-foreground">
+                      {t.sender_name ?? "—"} → {t.recipient_name ?? "—"}
                     </p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      {t.sender_name ?? "—"} → {t.recipient_name ?? "—"} · {dateTime(t.created_at)}
+                    <p className="num mt-0.5 truncate text-[11px] text-muted-foreground/80">
+                      {dateTime(t.created_at)}
                     </p>
                   </div>
                   <StatusPill status={t.status} />
                   <Link
                     to="/admin/transactions/$id"
                     params={{ id: t.id }}
-                    className="text-xs font-medium text-primary hover:underline"
+                    className="rounded-lg bg-raised px-2.5 py-1.5 text-xs font-semibold text-foreground ring-1 ring-line transition-colors hover:bg-primary hover:text-primary-foreground"
                   >
                     Traiter
                   </Link>
@@ -185,24 +225,31 @@ function DashboardPage() {
           )}
         </Card>
 
-        <Card className="p-4">
-          <div className="mb-3 flex items-center justify-between">
+        <Card className="surface rounded-xl p-0 shadow-none">
+          <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
             <h2 className="section-title">Activité récente</h2>
-            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-raised px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
               <Handshake className="size-3.5" /> {money(data.kpis.feesCollected)} de frais
             </span>
           </div>
           {data.recent.length === 0 ? (
             <EmptyState message="Aucune activité récente." />
           ) : (
-            <ul className="divide-y divide-border">
+            <ul className="divide-y divide-line">
               {data.recent.map((t: any) => (
-                <li key={t.id} className="flex items-center gap-3 py-2.5">
+                <li key={t.id} className="flex items-center gap-3 px-5 py-3">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
-                      {label(TX_TYPE_LABELS, t.type)} · {money(t.amount)}
+                    <div className="flex items-baseline gap-2">
+                      <span className="truncate text-sm font-medium text-foreground">
+                        {label(TX_TYPE_LABELS, t.type)}
+                      </span>
+                      <span className="num text-sm font-semibold text-foreground">
+                        {money(t.amount)}
+                      </span>
+                    </div>
+                    <p className="num mt-0.5 truncate text-[11px] text-muted-foreground">
+                      {dateTime(t.created_at)}
                     </p>
-                    <p className="truncate text-xs text-muted-foreground">{dateTime(t.created_at)}</p>
                   </div>
                   <StatusPill status={t.status} />
                 </li>

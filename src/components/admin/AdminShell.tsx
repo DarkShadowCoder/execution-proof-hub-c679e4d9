@@ -18,6 +18,7 @@ import {
   X,
   Bell,
   LifeBuoy,
+  Search,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -71,7 +72,7 @@ export function AdminShell({ admin, children }: { admin: AdminAccount; children:
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b border-line bg-background/90 px-4 backdrop-blur-md md:px-6">
+      <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b border-line bg-background/85 px-4 backdrop-blur-xl md:px-6">
         <button
           className="grid size-9 place-items-center rounded-lg bg-surface text-muted-foreground ring-1 ring-line transition-colors hover:bg-raised hover:text-foreground lg:hidden"
           onClick={() => setOpen((v) => !v)}
@@ -81,11 +82,11 @@ export function AdminShell({ admin, children }: { admin: AdminAccount; children:
         </button>
 
         <Link to="/admin" className="flex items-center gap-2.5">
-          <span className="grid size-8 place-items-center rounded-sm bg-primary font-mono text-[12px] font-bold tracking-tighter text-primary-foreground shadow-[var(--shadow-brand)]">
+          <span className="grid size-9 place-items-center rounded-xl brand-gradient font-display text-[13px] font-bold tracking-tighter text-primary-foreground shadow-[var(--shadow-brand)]">
             Z
           </span>
-          <span className="leading-none">
-            <span className="block text-[13px] font-bold tracking-tight text-foreground">
+          <span className="hidden leading-none sm:block">
+            <span className="font-display block text-[14px] font-semibold tracking-tight text-foreground">
               Zender237
             </span>
             <span className="mt-1 block font-mono text-[9px] font-semibold tracking-[0.18em] text-muted-foreground/80 uppercase">
@@ -94,29 +95,41 @@ export function AdminShell({ admin, children }: { admin: AdminAccount; children:
           </span>
         </Link>
 
-        <div className="ml-auto flex items-center gap-2">
-          <span className="mr-1 hidden items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-1 ring-1 ring-success/20 sm:flex">
+        <div className="mx-auto hidden w-full max-w-sm items-center gap-2 rounded-xl bg-surface px-3 py-2 ring-1 ring-line transition focus-within:ring-primary/40 md:flex">
+          <Search className="size-4 shrink-0 text-muted-foreground" />
+          <input
+            placeholder="Rechercher une transaction, un utilisateur…"
+            className="w-full bg-transparent text-[13px] text-foreground outline-none placeholder:text-muted-foreground/70"
+          />
+          <kbd className="rounded border border-line px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground">
+            ⌘K
+          </kbd>
+        </div>
+
+        <div className="ml-auto flex items-center gap-1.5">
+          <span className="mr-1 hidden items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-1 ring-1 ring-success/20 lg:flex">
             <span className="pulse-dot size-1.5 rounded-full bg-success" aria-hidden />
             <span className="text-[10px] font-bold tracking-wide text-success uppercase">Live</span>
           </span>
           <button
-            className="grid size-8 place-items-center rounded-lg bg-surface text-muted-foreground ring-1 ring-line transition-colors hover:bg-raised hover:text-foreground"
+            className="hidden size-9 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-raised hover:text-foreground sm:grid"
             aria-label="Aide"
           >
             <LifeBuoy className="size-4" />
           </button>
           <button
-            className="relative grid size-8 place-items-center rounded-lg bg-surface text-muted-foreground ring-1 ring-line transition-colors hover:bg-raised hover:text-foreground"
+            className="relative grid size-9 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-raised hover:text-foreground"
             aria-label="Notifications"
           >
             <Bell className="size-4" />
-            <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-primary ring-2 ring-background" />
+            <span className="absolute top-2 right-2 size-1.5 rounded-full bg-primary ring-2 ring-background" />
           </button>
-          <div className="flex items-center gap-2 rounded-full bg-surface py-1 pr-3 pl-1 ring-1 ring-line">
+          <span className="mx-1 hidden h-6 w-px bg-line sm:block" />
+          <div className="flex items-center gap-2 rounded-full bg-surface py-1 pr-1 pl-1 ring-1 ring-line md:pr-3">
             <span className="grid size-7 place-items-center rounded-full bg-primary/15 font-mono text-[10px] font-bold text-primary ring-1 ring-primary/25">
               {admin.full_name?.slice(0, 2).toUpperCase()}
             </span>
-            <div className="hidden leading-tight sm:block">
+            <div className="hidden leading-tight md:block">
               <p className="text-xs font-semibold text-foreground">{admin.full_name}</p>
               <p className="font-mono text-[9px] tracking-[0.12em] text-muted-foreground uppercase">
                 {admin.role}
@@ -125,7 +138,7 @@ export function AdminShell({ admin, children }: { admin: AdminAccount; children:
           </div>
           <button
             onClick={signOut}
-            className="grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+            className="grid size-9 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
             aria-label="Se déconnecter"
             title="Se déconnecter"
           >
@@ -139,13 +152,13 @@ export function AdminShell({ admin, children }: { admin: AdminAccount; children:
           <button
             aria-label="Fermer le menu"
             onClick={() => setOpen(false)}
-            className="fixed inset-0 top-14 z-20 bg-foreground/40 backdrop-blur-[2px] lg:hidden"
+            className="fixed inset-0 top-16 z-20 bg-foreground/40 backdrop-blur-[2px] lg:hidden"
           />
         ) : null}
 
         <aside
           className={cn(
-            "fixed inset-y-14 left-0 z-30 flex w-64 shrink-0 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar px-3 py-5 transition-transform duration-200 lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)] lg:translate-x-0",
+            "fixed inset-y-16 left-0 z-30 flex w-64 shrink-0 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar px-3 py-5 transition-transform duration-200 lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:translate-x-0",
             open ? "translate-x-0" : "-translate-x-full",
           )}
         >
