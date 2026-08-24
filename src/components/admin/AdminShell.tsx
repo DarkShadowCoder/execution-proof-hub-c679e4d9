@@ -152,13 +152,13 @@ export function AdminShell({ admin, children }: { admin: AdminAccount; children:
           <button
             aria-label="Fermer le menu"
             onClick={() => setOpen(false)}
-            className="fixed inset-0 top-14 z-20 bg-foreground/40 backdrop-blur-[2px] lg:hidden"
+            className="fixed inset-0 top-16 z-20 bg-foreground/40 backdrop-blur-[2px] lg:hidden"
           />
         ) : null}
 
         <aside
           className={cn(
-            "fixed inset-y-14 left-0 z-30 flex w-64 shrink-0 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar px-3 py-5 transition-transform duration-200 lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)] lg:translate-x-0",
+            "fixed inset-y-16 left-0 z-30 flex w-64 shrink-0 flex-col overflow-y-auto border-r border-sidebar-border bg-sidebar px-3 py-5 transition-transform duration-200 lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:translate-x-0",
             open ? "translate-x-0" : "-translate-x-full",
           )}
         >
