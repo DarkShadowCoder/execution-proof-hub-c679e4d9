@@ -78,9 +78,7 @@ export function KpiCard({
   return (
     <Card className="surface gap-0 rounded-xl p-5 shadow-none transition-shadow hover:shadow-[var(--shadow-elevated)]">
       <div className="flex items-start justify-between gap-3">
-        <p className="truncate text-xs font-medium tracking-wide text-muted-foreground uppercase">
-          {title}
-        </p>
+        <p className="mono-label truncate">{title}</p>
         {icon ? (
           <span className={cn("grid size-9 shrink-0 place-items-center rounded-lg", toneRing)}>
             {icon}
