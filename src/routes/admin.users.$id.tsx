@@ -51,7 +51,7 @@ function UserDetail() {
   if (!data?.profile) return <EmptyState message="Utilisateur introuvable." />;
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <Link to="/admin/users" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="size-4" /> Retour aux utilisateurs
       </Link>
@@ -70,7 +70,7 @@ function UserDetail() {
       </Card>
 
       <Card className="space-y-3 p-4">
-        <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Ajustement de wallet</h2>
+        <h2 className="section-title">Ajustement de wallet</h2>
         <div className="grid gap-2 sm:grid-cols-[1fr_2fr_auto]">
           <Input
             type="number"
@@ -86,7 +86,7 @@ function UserDetail() {
       </Card>
 
       <div className="space-y-2">
-        <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Transactions</h2>
+        <h2 className="section-title">Transactions</h2>
         <DataTable
           rows={data.transactions}
           empty="Aucune transaction."
@@ -115,7 +115,7 @@ function UserDetail() {
       </div>
 
       <div className="space-y-2">
-        <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Grand livre du wallet</h2>
+        <h2 className="section-title">Grand livre du wallet</h2>
         <DataTable
           rows={data.ledger}
           empty="Aucune écriture."

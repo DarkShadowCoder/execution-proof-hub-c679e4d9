@@ -96,7 +96,7 @@ function BatchesPage() {
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader title="Lots journaliers" subtitle="Regroupement quotidien des transactions confirmées" />
 
       <div className="grid gap-3 sm:grid-cols-3">

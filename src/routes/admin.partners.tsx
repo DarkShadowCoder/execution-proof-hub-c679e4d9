@@ -68,7 +68,7 @@ function PartnersPage() {
   });
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader
         title="Partenaires"
         subtitle="Réseau d'exécution sur le terrain"

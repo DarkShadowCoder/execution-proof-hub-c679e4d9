@@ -74,7 +74,7 @@ function SettingsPage() {
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader title="Paramètres" subtitle="Comptes administrateurs de la plateforme" />
 
       <section className="space-y-2">

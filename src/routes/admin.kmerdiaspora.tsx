@@ -92,7 +92,7 @@ function KmerDiasporaPage() {
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader title="KmerDiaspora" subtitle="Supervision de l'espace communautaire et modération" />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

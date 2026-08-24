@@ -59,7 +59,7 @@ function MomoPage() {
   });
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader
         title="Numéros Mobile Money"
         subtitle="Comptes de réception utilisés pour les dépôts clients"

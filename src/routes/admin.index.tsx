@@ -66,7 +66,7 @@ function DashboardPage() {
   const k = data.kpis;
 
   return (
-    <div className="space-y-6">
+    <div className="reveal space-y-6">
       <PageHeader
         title="Console opérationnelle"
         subtitle="Qu'est-ce qui nécessite votre intervention maintenant ?"
@@ -94,7 +94,7 @@ function DashboardPage() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <Card className="p-4 lg:col-span-2">
-          <h2 className="font-display mb-3 text-base font-semibold">Volumes des 14 derniers jours</h2>
+          <h2 className="section-title mb-3 block">Volumes des 14 derniers jours</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data.series}>
@@ -128,7 +128,7 @@ function DashboardPage() {
         </Card>
 
         <Card className="p-4">
-          <h2 className="font-display mb-3 text-base font-semibold">Répartition par type</h2>
+          <h2 className="section-title mb-3 block">Répartition par type</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.mix.map((m) => ({ ...m, type: label(TX_TYPE_LABELS, m.type) }))}>
@@ -152,7 +152,7 @@ function DashboardPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <Card className="p-4">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-display text-base font-semibold">À traiter maintenant</h2>
+            <h2 className="section-title">À traiter maintenant</h2>
             <Link to="/admin/transactions" className="text-xs font-medium text-primary hover:underline">
               Tout voir
             </Link>
@@ -187,7 +187,7 @@ function DashboardPage() {
 
         <Card className="p-4">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-display text-base font-semibold">Activité récente</h2>
+            <h2 className="section-title">Activité récente</h2>
             <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <Handshake className="size-3.5" /> {money(data.kpis.feesCollected)} de frais
             </span>

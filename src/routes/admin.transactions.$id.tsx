@@ -153,7 +153,7 @@ function TransactionDetail() {
   const tx = data.tx;
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <Link to="/admin/transactions" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="size-4" /> Retour aux transactions
       </Link>
@@ -193,7 +193,7 @@ function TransactionDetail() {
           </Card>
 
           <Card className="space-y-3 p-4">
-            <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Preuves du client</h2>
+            <h2 className="section-title">Preuves du client</h2>
             {data.proofs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune preuve envoyée.</p>
             ) : (
@@ -206,7 +206,7 @@ function TransactionDetail() {
           </Card>
 
           <Card className="space-y-3 p-4">
-            <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Preuves d'exécution</h2>
+            <h2 className="section-title">Preuves d'exécution</h2>
             {data.execProofs.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucune preuve d'exécution enregistrée.</p>
             ) : (
@@ -256,7 +256,7 @@ function TransactionDetail() {
           </Card>
 
           <Card className="space-y-3 p-4">
-            <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Historique</h2>
+            <h2 className="section-title">Historique</h2>
             {data.history.length === 0 ? (
               <p className="text-sm text-muted-foreground">Aucun changement de statut.</p>
             ) : (
@@ -277,7 +277,7 @@ function TransactionDetail() {
 
         <div className="space-y-5">
           <Card className="space-y-3 p-4">
-            <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Décision</h2>
+            <h2 className="section-title">Décision</h2>
             <Textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}
@@ -320,7 +320,7 @@ function TransactionDetail() {
           </Card>
 
           <Card className="space-y-3 p-4">
-            <h2 className="font-display text-sm font-semibold tracking-wide uppercase">Affectation partenaire</h2>
+            <h2 className="section-title">Affectation partenaire</h2>
             <select
               value={partnerId}
               onChange={(e) => setPartnerId(e.target.value)}

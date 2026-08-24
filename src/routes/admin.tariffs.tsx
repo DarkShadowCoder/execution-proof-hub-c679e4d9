@@ -117,7 +117,7 @@ function TariffsPage() {
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader
         title="Tarifs"
         subtitle="Frais appliqués par corridor et tranche de montant"

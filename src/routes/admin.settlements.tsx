@@ -157,7 +157,7 @@ function SettlementsPage() {
     rows.filter((r: any) => r.status === s).reduce((a: number, r: any) => a + Number(r.amount ?? 0), 0);
 
   return (
-    <div className="space-y-5">
+    <div className="reveal space-y-5">
       <PageHeader
         title="Règlements bancaires"
         subtitle="Virements entre comptes de collecte et comptes de reversement"
