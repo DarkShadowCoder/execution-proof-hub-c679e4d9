@@ -85,7 +85,7 @@ export function KpiCard({
           </span>
         ) : null}
       </div>
-      <div className="mt-3 flex flex-wrap items-baseline gap-2">
+      <div className="mt-3.5 flex flex-wrap items-baseline gap-2">
         <p className="num font-display truncate text-[1.75rem] leading-none font-semibold text-foreground">
           {value}
         </p>
@@ -117,7 +117,7 @@ export function PageHeader({
     <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-5">
       <div className="min-w-0">
         {breadcrumb?.length ? (
-          <nav className="mb-2 flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
+          <nav className="mono-label mb-2 flex flex-wrap items-center gap-1">
             {breadcrumb.map((crumb, i) => (
               <span key={`${crumb.label}-${i}`} className="flex items-center gap-1">
                 {i > 0 ? <ChevronRight className="size-3" aria-hidden /> : null}
@@ -157,8 +157,8 @@ export function EmptyState({ message, icon }: { message: string; icon?: ReactNod
 
 export function Field({ label: l, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="space-y-1 rounded-lg border border-border/70 bg-muted/30 px-3 py-2">
-      <p className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">{l}</p>
+    <div className="space-y-1 rounded-lg border-l-2 border-primary/40 bg-raised/60 px-3 py-2">
+      <p className="mono-label">{l}</p>
       <p className="text-sm font-medium break-words text-foreground">{value ?? "—"}</p>
     </div>
   );

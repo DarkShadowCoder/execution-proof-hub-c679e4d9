@@ -81,33 +81,46 @@ function LoginPage() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="brand-gradient relative hidden flex-col justify-between p-12 text-primary-foreground lg:flex">
+      <div className="relative hidden flex-col justify-between bg-sidebar p-12 text-sidebar-foreground lg:flex">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--sidebar-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--sidebar-foreground) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+          aria-hidden
+        />
         <div className="flex items-center gap-2">
-          <span className="font-display grid size-10 place-items-center rounded-xl bg-primary-foreground/15 text-xl font-bold">
+          <span className="font-display relative grid size-10 place-items-center rounded-xl bg-sidebar-primary text-xl font-bold text-sidebar-primary-foreground">
             Z
           </span>
-          <span className="font-display text-xl font-semibold">Zender237</span>
+          <span className="font-display relative text-xl font-semibold">Zender237</span>
         </div>
-        <div className="max-w-md space-y-4">
+        <div className="relative max-w-md space-y-4">
+          <p className="mono-label text-sidebar-primary">Back-office · Console admin</p>
           <h2 className="font-display text-3xl leading-tight font-semibold">
             Le centre de contrôle opérationnel de Zender237.
           </h2>
-          <p className="text-sm text-primary-foreground/80">
+          <p className="text-sm text-sidebar-foreground/70">
             Supervision des transactions, vérification des preuves, affectation aux partenaires,
             règlements bancaires et audit complet — en un seul endroit.
           </p>
         </div>
-        <p className="text-xs text-primary-foreground/60">Accès réservé aux administrateurs autorisés.</p>
+        <p className="mono-label relative text-sidebar-foreground/50">
+          <span className="pulse-dot mr-2 inline-block size-1.5 rounded-full bg-sidebar-primary align-middle" />
+          Accès réservé aux administrateurs autorisés
+        </p>
       </div>
 
       <div className="flex items-center justify-center p-6">
-        <Card className="surface elevated w-full max-w-sm rounded-2xl p-8">
+        <Card className="surface elevated reveal w-full max-w-sm rounded-2xl p-8">
           <div className="mb-6 space-y-1.5 text-center">
             <span className="mx-auto grid size-11 place-items-center rounded-2xl bg-primary/10 text-primary">
               <ShieldCheck className="size-5" />
             </span>
-            <h1 className="font-display text-xl font-semibold">Connexion administrateur</h1>
-            <p className="text-sm text-muted-foreground">Back-office Zender237</p>
+            <h1 className="font-display pt-2 text-xl font-semibold">Connexion administrateur</h1>
+            <p className="mono-label">Back-office Zender237</p>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-4">

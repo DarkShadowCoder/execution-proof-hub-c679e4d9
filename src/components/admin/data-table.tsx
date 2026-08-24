@@ -170,13 +170,13 @@ export function DataTable<T extends { id?: string }>({
         ) : (
           <div className="max-h-[70vh] overflow-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 z-10 bg-muted/70 text-left text-[11px] tracking-wider text-muted-foreground uppercase backdrop-blur">
+              <thead className="sticky top-0 z-10 bg-raised/85 text-left backdrop-blur">
                 <tr>
                   {columns.map((c) => (
                     <th
                       key={c.key}
                       className={cn(
-                        "border-b border-border px-5 py-3 font-semibold whitespace-nowrap",
+                        "mono-label border-b border-border px-5 py-3 whitespace-nowrap",
                         c.align === "right" && "text-right",
                       )}
                     >
@@ -187,7 +187,7 @@ export function DataTable<T extends { id?: string }>({
               </thead>
               <tbody className="divide-y divide-border/70">
                 {visibleRows.map((row, i) => (
-                  <tr key={(row.id as string) ?? i} className="transition-colors hover:bg-muted/40">
+                  <tr key={(row.id as string) ?? i} className="transition-colors hover:bg-primary/[0.04]">
                     {columns.map((c) => (
                       <td
                         key={c.key}
