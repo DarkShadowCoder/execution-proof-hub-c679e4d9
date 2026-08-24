@@ -153,8 +153,8 @@ function DashboardPage() {
           </div>
         </Card>
 
-        <Card className="p-4">
-          <h2 className="section-title mb-3 block">Répartition par type</h2>
+        <Card className="surface rounded-xl p-5 shadow-none">
+          <h2 className="section-title mb-4 block">Répartition par type</h2>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.mix.map((m) => ({ ...m, type: label(TX_TYPE_LABELS, m.type) }))}>
@@ -175,33 +175,47 @@ function DashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="p-4">
-          <div className="mb-3 flex items-center justify-between">
+      <div className="grid gap-5 lg:grid-cols-2">
+        <Card className="surface rounded-xl p-0 shadow-none">
+          <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
             <h2 className="section-title">À traiter maintenant</h2>
-            <Link to="/admin/transactions" className="text-xs font-medium text-primary hover:underline">
-              Tout voir
+            <Link
+              to="/admin/transactions"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+            >
+              Tout voir <ArrowUpRight className="size-3.5" />
             </Link>
           </div>
           {data.queue.length === 0 ? (
             <EmptyState message="Aucune transaction en attente d'intervention." />
           ) : (
-            <ul className="divide-y divide-border">
+            <ul className="divide-y divide-line">
               {data.queue.map((t: any) => (
-                <li key={t.id} className="flex items-center gap-3 py-2.5">
+                <li
+                  key={t.id}
+                  className="flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3.5 transition-colors hover:bg-primary/[0.035]"
+                >
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
-                      {label(TX_TYPE_LABELS, t.type)} · {money(t.amount)}
+                    <div className="flex items-baseline gap-2">
+                      <span className="truncate text-sm font-semibold text-foreground">
+                        {label(TX_TYPE_LABELS, t.type)}
+                      </span>
+                      <span className="num text-sm font-semibold text-foreground">
+                        {money(t.amount)}
+                      </span>
+                    </div>
+                    <p className="mt-1 truncate text-xs text-muted-foreground">
+                      {t.sender_name ?? "—"} → {t.recipient_name ?? "—"}
                     </p>
-                    <p className="truncate text-xs text-muted-foreground">
-                      {t.sender_name ?? "—"} → {t.recipient_name ?? "—"} · {dateTime(t.created_at)}
+                    <p className="num mt-0.5 truncate text-[11px] text-muted-foreground/80">
+                      {dateTime(t.created_at)}
                     </p>
                   </div>
                   <StatusPill status={t.status} />
                   <Link
                     to="/admin/transactions/$id"
                     params={{ id: t.id }}
-                    className="text-xs font-medium text-primary hover:underline"
+                    className="rounded-lg bg-raised px-2.5 py-1.5 text-xs font-semibold text-foreground ring-1 ring-line transition-colors hover:bg-primary hover:text-primary-foreground"
                   >
                     Traiter
                   </Link>
@@ -211,24 +225,31 @@ function DashboardPage() {
           )}
         </Card>
 
-        <Card className="p-4">
-          <div className="mb-3 flex items-center justify-between">
+        <Card className="surface rounded-xl p-0 shadow-none">
+          <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
             <h2 className="section-title">Activité récente</h2>
-            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-raised px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
               <Handshake className="size-3.5" /> {money(data.kpis.feesCollected)} de frais
             </span>
           </div>
           {data.recent.length === 0 ? (
             <EmptyState message="Aucune activité récente." />
           ) : (
-            <ul className="divide-y divide-border">
+            <ul className="divide-y divide-line">
               {data.recent.map((t: any) => (
-                <li key={t.id} className="flex items-center gap-3 py-2.5">
+                <li key={t.id} className="flex items-center gap-3 px-5 py-3">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
-                      {label(TX_TYPE_LABELS, t.type)} · {money(t.amount)}
+                    <div className="flex items-baseline gap-2">
+                      <span className="truncate text-sm font-medium text-foreground">
+                        {label(TX_TYPE_LABELS, t.type)}
+                      </span>
+                      <span className="num text-sm font-semibold text-foreground">
+                        {money(t.amount)}
+                      </span>
+                    </div>
+                    <p className="num mt-0.5 truncate text-[11px] text-muted-foreground">
+                      {dateTime(t.created_at)}
                     </p>
-                    <p className="truncate text-xs text-muted-foreground">{dateTime(t.created_at)}</p>
                   </div>
                   <StatusPill status={t.status} />
                 </li>
