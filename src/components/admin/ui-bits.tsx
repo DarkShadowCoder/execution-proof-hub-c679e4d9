@@ -76,17 +76,17 @@ export function KpiCard({
         ? "text-success bg-success/10"
         : "text-muted-foreground bg-muted";
   return (
-    <Card className="surface gap-0 rounded-xl p-5 shadow-none transition-shadow hover:shadow-[var(--shadow-elevated)]">
-      <div className="flex items-start justify-between gap-3">
-        <p className="mono-label truncate">{title}</p>
+    <Card className="surface group gap-0 rounded-xl p-4 shadow-none transition-shadow hover:shadow-[var(--shadow-elevated)]">
+      <div className="flex items-center gap-3">
         {icon ? (
-          <span className={cn("grid size-9 shrink-0 place-items-center rounded-lg", toneRing)}>
+          <span className={cn("grid size-8 shrink-0 place-items-center rounded-lg", toneRing)}>
             {icon}
           </span>
         ) : null}
+        <p className="mono-label truncate">{title}</p>
       </div>
-      <div className="mt-3.5 flex flex-wrap items-baseline gap-2">
-        <p className="num font-display truncate text-[1.75rem] leading-none font-semibold text-foreground">
+      <div className="mt-2.5 flex flex-wrap items-baseline gap-2">
+        <p className="num font-display truncate text-[1.375rem] leading-none font-semibold text-foreground">
           {value}
         </p>
         {trend ? (
@@ -97,7 +97,7 @@ export function KpiCard({
           </span>
         ) : null}
       </div>
-      {hint ? <p className="mt-2 truncate text-xs text-muted-foreground">{hint}</p> : null}
+      {hint ? <p className="mt-1.5 truncate text-xs text-muted-foreground">{hint}</p> : null}
     </Card>
   );
 }
